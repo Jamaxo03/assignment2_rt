@@ -2,6 +2,7 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+import time
 
 class UINode(Node):
     def __init__(self):
@@ -24,9 +25,15 @@ class UINode(Node):
                 msg.angular.z = ang_z
                 
                 self.publisher_.publish(msg)
-                self.get_logger().info(f'Published: lin={lin_x}, ang={ang_z}')
+                self.get_logger().info(f'Published: lin={lin_x}, ang={ang_z} for 5 seconds')
+
+                time.sleep(5)
+
+                stop_msg = Twist()
+                self.publisher_.publish(stop_msg)
+                self.get_logger().info('Robot stopped')
             except ValueError:
-                print("Enter a valid number.")
+                print("Enter a valid number")
 
 def main(args=None):
     rclpy.init(args=args)
