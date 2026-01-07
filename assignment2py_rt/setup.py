@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'ui_node = assignment2py_rt.ui_node:main',
         ],
     },
 )
