@@ -24,6 +24,7 @@ setup(
     entry_points={
         'console_scripts': [
             'ui_node = assignment2py_rt.ui_node:main',
+            'safety_node = assignment2py_rt.safety_node:main',
         ],
     },
 )
