@@ -8,7 +8,8 @@ class UINode(Node):
     def __init__(self):
         super().__init__('ui_node')
         
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        #self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.publisher_ = self.create_publisher(Twist, '/cmd_vel_ui', 10)
         self.get_logger().info('Node Ready')
         
         
