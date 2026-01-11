@@ -18,8 +18,8 @@ class UINode(Node):
         self.cli_average = self.create_client(GetAvgSpeed, 'get_avg_speed')
         self.srv_average = self.create_service(GetAvgSpeed, 'get_avg_speed', self.get_avg_callback)
 
-        while not self.cli_threshold.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Waiting for set_threshold service')
+        #while not self.cli_threshold.wait_for_service(timeout_sec=1.0):
+            #self.get_logger().info('Waiting for set_threshold service')
 
 
         self.get_logger().info('Node Ready')
@@ -79,7 +79,7 @@ class UINode(Node):
             request = SetThreshold.Request()
             request.new_threshold = new_threshold
 
-            future = self.threshold_client.call_async(request)
+            future = self.cli_threshold.call_async(request)
 
             rclpy.spin_until_future_complete(self, future)
 
@@ -94,7 +94,7 @@ class UINode(Node):
     def get_average(self):
         
         request = GetAvgSpeed.Request()
-        future = self.avg_client.call_async(request)
+        future = self.cli_average.call_async(request)
         
         rclpy.spin_until_future_complete(self, future)
         
