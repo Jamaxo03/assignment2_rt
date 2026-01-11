@@ -39,3 +39,5 @@ The safety system is based on a non-blocking State Machine. When the distance to
 - Escape State: Once the obstacle is safely behind the robot, it moves forward with a positive linear velocity for a set amount of time.
 
 - Safe State: After moving away from the danger zone, the robot stops completely and resets the user's last command to zero, waiting for a new input from the menu.
+
+Design Choice: This approach was chosen as the most straightforward and realistic solution to ensure safety. It avoids "teleporting" the robot back to a previous coordinate, relying instead on physical movement to reach a safe area, which better simulates real-world robotic behavior.
