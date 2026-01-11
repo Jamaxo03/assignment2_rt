@@ -27,6 +27,7 @@ endif()
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/RobotStatus.msg"
   "srv/SetThreshold.srv"
+  "srv/GetAvgSpeed.srv"
 )
 
 ament_package()

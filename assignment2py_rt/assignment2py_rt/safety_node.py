@@ -75,8 +75,6 @@ class SafetyNode(Node):
 
     def control_loop(self):
 
-        self.get_logger().info(f"STATE={self.state} | UI=({self.last_ui_cmd.linear.x:.2f}, {self.last_ui_cmd.angular.z:.2f})")
-
         if self.state == "IDLE":
             
             self.pub_vel.publish(self.last_ui_cmd)
@@ -98,14 +96,14 @@ class SafetyNode(Node):
             msg.angular.z = 0.0
             self.pub_vel.publish(msg)
             self.state_timer -= 0.1
+
             if self.state_timer <= 0:
-                # safe
+                
                 self.last_ui_cmd = Twist() 
                 self.state = "IDLE"
-                self.get_logger().info("Robot is safe now.")
 
     def initiate_escape(self):
-        self.get_logger().warn(f"DANGER -> {self.current_direction.upper()}! Switching to escape state.")
+
         self.state = "ROTATING"
         self.last_ui_cmd = Twist()
         self.escape_msg = Twist()
@@ -123,7 +121,6 @@ class SafetyNode(Node):
 
     def change_threshold_callback(self, request, response):
         self.threshold = request.new_threshold
-        self.get_logger().info(f'New threshold set: {self.threshold}')
         response.success = True
         return response
 
